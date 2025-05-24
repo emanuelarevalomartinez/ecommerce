@@ -1,9 +1,8 @@
-package com.firstSpringBootProject.first.User.infrastructure.adapters.persistence.PostgreSQL;
+package com.firstSpringBootProject.first.User.infrastructure.adapters.output.persistence.repositories;
 
 import com.firstSpringBootProject.first.User.domain.models.User;
-import com.firstSpringBootProject.first.User.domain.ports.UserRepository;
-import com.firstSpringBootProject.first.User.infrastructure.adapters.repositories.UserPersistence;
-import com.firstSpringBootProject.first.User.infrastructure.mappers.UserMapper;
+import com.firstSpringBootProject.first.User.domain.ports.out.UserRepositoryPort;
+import com.firstSpringBootProject.first.User.infrastructure.adapters.output.persistence.mappers.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -11,10 +10,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class UserPersistenceImp implements UserRepository {
+public class JpaUserRepositoryAdapter implements UserRepositoryPort {
 
     @Autowired
-    private UserPersistence userPersistence;
+    private JpaUserRepository userPersistence;
 
     @Autowired
     private UserMapper userMapper;

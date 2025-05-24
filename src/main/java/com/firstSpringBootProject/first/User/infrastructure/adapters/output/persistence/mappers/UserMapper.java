@@ -1,8 +1,8 @@
-package com.firstSpringBootProject.first.User.infrastructure.mappers;
+package com.firstSpringBootProject.first.User.infrastructure.adapters.output.persistence.mappers;
 
 
 import com.firstSpringBootProject.first.User.domain.models.User;
-import com.firstSpringBootProject.first.User.infrastructure.entities.UserEntity;
+import com.firstSpringBootProject.first.User.infrastructure.adapters.output.persistence.entities.UserEntity;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

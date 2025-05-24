@@ -1,4 +1,4 @@
-package com.firstSpringBootProject.first.User.infrastructure.entities;
+package com.firstSpringBootProject.first.User.infrastructure.adapters.output.persistence.entities;
 
 
 import com.firstSpringBootProject.first.User.domain.enums.UserType;

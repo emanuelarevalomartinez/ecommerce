@@ -1,0 +1,4 @@
+package com.firstSpringBootProject.first.User.infrastructure.adapters.inputs.rest.dto;
+
+public class UpdateUserDto {
+}
