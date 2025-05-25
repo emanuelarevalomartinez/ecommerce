@@ -11,7 +11,7 @@ import org.mapstruct.Mappings;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
-public interface UserMapper {
+public interface UserPersistenceMapper {
     @Mappings(
             {
                   /*  @Mapping(source = "id", target = "id"),*/

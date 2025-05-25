@@ -2,7 +2,7 @@ package com.firstSpringBootProject.first.User.infrastructure.adapters.output.per
 
 import com.firstSpringBootProject.first.User.domain.models.User;
 import com.firstSpringBootProject.first.User.domain.ports.out.UserRepositoryPort;
-import com.firstSpringBootProject.first.User.infrastructure.adapters.output.persistence.mappers.UserMapper;
+import com.firstSpringBootProject.first.User.infrastructure.adapters.output.persistence.mappers.UserPersistenceMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -16,7 +16,7 @@ public class JpaUserRepositoryAdapter implements UserRepositoryPort {
     private JpaUserRepository userPersistence;
 
     @Autowired
-    private UserMapper userMapper;
+    private UserPersistenceMapper userMapper;
 
 
     @Override
@@ -31,7 +31,7 @@ public class JpaUserRepositoryAdapter implements UserRepositoryPort {
 
     @Override
     public Optional<User> findById(Long id) {
-        return Optional.empty();
+        return Optional.ofNullable(userMapper.toUser(userPersistence.findById(id).get()));
     }
 
     @Override

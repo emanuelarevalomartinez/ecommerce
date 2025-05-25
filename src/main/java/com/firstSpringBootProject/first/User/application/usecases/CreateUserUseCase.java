@@ -17,16 +17,4 @@ public class CreateUserUseCase implements CreateUserPort {
         return this.userRepositoryPort.save(user);
     }
 
-
-
- /*   private final UserRepositoryPort userRepository;
-
-    public CreateUserUseCase(UserRepositoryPort iUserRepository) {
-        this.userRepository = iUserRepository;
-    }
-
-    public User save(User user) {
-        return this.userRepository.save(user);
-    }*/
-
 }
