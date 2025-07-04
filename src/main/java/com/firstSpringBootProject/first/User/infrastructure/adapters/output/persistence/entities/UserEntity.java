@@ -27,11 +27,11 @@ public class UserEntity {
 
 
     @Column(nullable = false, length = 100)
-    @Size(min = 2, max = 100)
+    @Size(min = 4, max = 100)
     private String firstName;
 
     @Column(nullable = false, length = 100)
-    @Size(min = 2, max = 100)
+    @Size(min = 4, max = 100)
     private String lastName;
 
     @Column(unique = true, nullable = false, length = 255)
@@ -40,7 +40,7 @@ public class UserEntity {
     private String email;
 
     @Column(nullable = false, length = 500)
-    @Size(max = 500)
+    @Size(min= 5, max = 500)
     private String address;
 
     @Column(nullable = false, length = 20)

@@ -30,7 +30,7 @@ public interface UserPersistenceMapper {
     User toUser(UserEntity userEntity);
     List<User> toUsers(List<UserEntity> userEntities);
 
-    @InheritInverseConfiguration
+//    @InheritInverseConfiguration
     UserEntity toUserEntity(User user);
 
 }
