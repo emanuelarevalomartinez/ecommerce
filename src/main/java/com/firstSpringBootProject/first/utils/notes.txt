@@ -1,0 +1,24 @@
+
+
+utils: herramientas pequeñas y reutilizables
+Responsabilidad: contener funciones puramente utilitarias, sin estado ni dependencia del dominio.
+
+Qué va aquí:
+
+Funciones como formatDate(), generateUUID(), slugify(), isValidEmail().
+
+Helpers matemáticos, de validación, de transformación de strings, etc.
+
+Clases estáticas o funciones puras que no dependen de contexto.
+
+Por qué: son piezas genéricas que podrías copiar y pegar en otro proyecto sin romper nada.
+
+
+diferencias
+
+
+
+Carpeta	Nivel de abstracción	¿Conoce el dominio?	¿Se puede usar en otro proyecto?
+utils	Bajo	No	Sí
+shared	Medio	Parcialmente	A veces
+common	Medio/Alto	Sí (infraestructura)	No (depende del proyecto)

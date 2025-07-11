@@ -1,6 +1,7 @@
 package com.firstSpringBootProject.first.User.application.usecases;
 
-import com.firstSpringBootProject.first.User.domain.exceptions.UserNotFoundException;
+import com.firstSpringBootProject.first.User.domain.exceptions.DomainException;
+import com.firstSpringBootProject.first.User.domain.exceptions.ErrorMessageCode;
 import com.firstSpringBootProject.first.User.domain.models.User;
 import com.firstSpringBootProject.first.User.domain.ports.in.FindUserByUsernamePort;
 import com.firstSpringBootProject.first.User.domain.ports.out.UserRepositoryPort;
@@ -15,7 +16,15 @@ public class FindUserByUsernameUseCase implements FindUserByUsernamePort {
 
     @Override
     public User findByUsername(String username) {
+
+        String message = "User with username " + username + " not found";
+
         return this.userRepositoryPort.findByUsername(username)
-                .orElseThrow( () -> new UserNotFoundException("User with username " + username + " not found") );
+                .orElseThrow( () -> new DomainException(
+                        ErrorMessageCode.USER_NOT_FOUND.getStatus(),
+                        ErrorMessageCode.USER_NOT_FOUND.getType(),
+                        message,
+                        null
+                ));
     }
 }

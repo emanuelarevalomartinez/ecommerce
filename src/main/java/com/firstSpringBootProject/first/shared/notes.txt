@@ -1,0 +1,21 @@
+shared: contratos y estructuras comunes
+Responsabilidad: compartir definiciones que se usan en múltiples capas o módulos.
+
+Qué va aquí:
+
+DTOs, enums, interfaces, value objects.
+
+Clases comunes como Pagination, SortOptions, ApiResponse<T>.
+
+Tipos que se usan tanto en entrada como en salida, o entre módulos.
+
+Por qué: evita duplicación y asegura consistencia entre capas (por ejemplo, entre dominio y adaptadores).
+
+
+diferencias
+
+
+Carpeta	Nivel de abstracción	¿Conoce el dominio?	¿Se puede usar en otro proyecto?
+utils	Bajo	No	Sí
+shared	Medio	Parcialmente	A veces
+common	Medio/Alto	Sí (infraestructura)	No (depende del proyecto)

@@ -19,5 +19,5 @@ public interface UserRepositoryPort {
 
     User update(Long id,User user);
 
-    void deleteById(Long id);
+    boolean deleteById(Long id);
 }

@@ -2,9 +2,8 @@ package com.firstSpringBootProject.first.User.infrastructure.adapters.inputs.res
 
 import com.firstSpringBootProject.first.User.domain.models.User;
 import com.firstSpringBootProject.first.User.infrastructure.adapters.inputs.rest.dto.CreateUserDto;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
+import com.firstSpringBootProject.first.User.infrastructure.adapters.inputs.rest.dto.UpdateUserDto;
+import org.mapstruct.*;
 
 @Mapper(componentModel = "spring")
 public interface UserRestMapper {
@@ -22,7 +21,10 @@ public interface UserRestMapper {
             @Mapping(target = "dateCreated", ignore = true),
             @Mapping(target = "dateUpdated", ignore = true)
     })
-    User toDomainUser(CreateUserDto createUserDto);
+    User createUserFromDtoToDomainUser(CreateUserDto createUserDto);
+
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    User updateUserFromDtoToDomainUser(UpdateUserDto updateUserDto);
 
     // Si necesitas devolver un DTO de respuesta, lo definirías aquí:
     // @Mapping(source = "id", target = "id")

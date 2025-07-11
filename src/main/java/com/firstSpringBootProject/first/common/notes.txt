@@ -1,0 +1,24 @@
+
+
+Responsabilidad: contener componentes reutilizables que no son específicos de un módulo, pero sí del proyecto.
+
+Qué va aquí:
+
+Middlewares, interceptores, filtros, anotaciones personalizadas.
+
+Excepciones comunes (BadRequestException, NotFoundException).
+
+Configuraciones compartidas (ObjectMapper, CORS, Logging).
+
+Adaptadores genéricos (BaseRepository, BaseController).
+
+Por qué: encapsula lógica que se aplica en todo el sistema, pero que no pertenece a un dominio específico.
+
+
+como diferenciar
+
+
+Carpeta	Nivel de abstracción	¿Conoce el dominio?	¿Se puede usar en otro proyecto?
+utils	Bajo	No	Sí
+shared	Medio	Parcialmente	A veces
+common	Medio/Alto	Sí (infraestructura)	No (depende del proyecto)

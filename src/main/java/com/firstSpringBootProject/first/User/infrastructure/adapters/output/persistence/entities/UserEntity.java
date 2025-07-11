@@ -152,4 +152,21 @@ public class UserEntity {
     public void setDateUpdated(LocalDateTime dateUpdated) {
         this.dateUpdated = dateUpdated;
     }
+
+    @Override
+    public String toString() {
+        return "UserEntity{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
+                ", cellphone='" + cellphone + '\'' +
+                ", password='" + password + '\'' +
+                ", userType=" + userType +
+                ", dateCreated=" + dateCreated +
+                ", dateUpdated=" + dateUpdated +
+                '}';
+    }
 }

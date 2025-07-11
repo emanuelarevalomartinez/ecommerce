@@ -108,4 +108,21 @@ public class User {
     public void setDateUpdated(LocalDateTime dateUpdated) {
         this.dateUpdated = dateUpdated;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
+                ", cellphone='" + cellphone + '\'' +
+                ", password='" + password + '\'' +
+                ", userType=" + userType +
+                ", dateCreated=" + dateCreated +
+                ", dateUpdated=" + dateUpdated +
+                '}';
+    }
 }

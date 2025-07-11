@@ -1,11 +1,10 @@
 package com.firstSpringBootProject.first.User.application.usecases;
 
-import com.firstSpringBootProject.first.User.domain.exceptions.UserNotFoundException;
+import com.firstSpringBootProject.first.User.domain.exceptions.DomainException;
+import com.firstSpringBootProject.first.User.domain.exceptions.ErrorMessageCode;
 import com.firstSpringBootProject.first.User.domain.models.User;
 import com.firstSpringBootProject.first.User.domain.ports.in.FindUserByIdPort;
 import com.firstSpringBootProject.first.User.domain.ports.out.UserRepositoryPort;
-
-import java.util.Optional;
 
 public class FindUserByIdUseCase implements FindUserByIdPort {
 
@@ -17,7 +16,15 @@ public class FindUserByIdUseCase implements FindUserByIdPort {
 
     @Override
     public User findById(Long id) {
+
+        String message = "User with id " + id + " not found";
+
         return  this.userRepositoryPort.findById(id)
-                .orElseThrow(()-> new UserNotFoundException("User with id " + id + " not found"));
+                .orElseThrow(()-> new DomainException(
+                        ErrorMessageCode.USER_NOT_FOUND.getStatus(),
+                        ErrorMessageCode.USER_NOT_FOUND.getType(),
+                        message,
+                        null
+                ));
     }
 }
