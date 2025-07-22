@@ -1,6 +1,7 @@
 package com.firstSpringBootProject.first.common.exceptions;
 
-import com.firstSpringBootProject.first.User.domain.exceptions.DomainException;
+import com.firstSpringBootProject.first.Category.domain.exceptions.CategoryDomainException;
+import com.firstSpringBootProject.first.User.domain.exceptions.UserDomainException;
 import com.firstSpringBootProject.first.shared.ApiResponse.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +15,22 @@ import java.util.Map;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(DomainException.class)
-    public ResponseEntity<ApiResponse<Object>> handleDomainExceptions(DomainException ex) {
+    @ExceptionHandler(UserDomainException.class)
+    public ResponseEntity<ApiResponse<Object>> handleDomainExceptions(UserDomainException ex) {
+
+        int statusCode = (ex.getStatusCode() > 0) ? ex.getStatusCode() : HttpStatus.BAD_REQUEST.value();
+
+        ApiResponse<Object> response = new ApiResponse<>(
+                statusCode,
+                ex.getType(),
+                ex.getMessage(),
+                ex.getData()
+        );
+        return new ResponseEntity<>(response, HttpStatus.valueOf(ex.getStatusCode()));
+    }
+
+    @ExceptionHandler(CategoryDomainException.class)
+    public ResponseEntity<ApiResponse<Object>> handleCategoryDomainExceptions(CategoryDomainException ex) {
 
         int statusCode = (ex.getStatusCode() > 0) ? ex.getStatusCode() : HttpStatus.BAD_REQUEST.value();
 

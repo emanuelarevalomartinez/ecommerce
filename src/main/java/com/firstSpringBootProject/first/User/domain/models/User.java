@@ -16,10 +16,10 @@ public class User {
     private String cellphone;
     private String password;
     private UserType userType;
-    private LocalDateTime dateCreated;
-    private LocalDateTime dateUpdated;
+    private String dateCreated;
+    private String dateUpdated;
 
-    public User(Long id,String username, String firstName, String lastName, String email, String address, String cellphone, String password, UserType userType, LocalDateTime dateCreated, LocalDateTime dateUpdated) {
+    public User(Long id,String username, String firstName, String lastName, String email, String address, String cellphone, String password, UserType userType, String dateCreated, String dateUpdated) {
         this.id = id;
         this.username = username;
         this.firstName = firstName;
@@ -31,6 +31,14 @@ public class User {
         this.userType = userType;
         this.dateCreated = dateCreated;
         this.dateUpdated = dateUpdated;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -97,15 +105,15 @@ public class User {
         this.userType = userType;
     }
 
-    public LocalDateTime getDateCreated() {
+    public String getDateCreated() {
         return dateCreated;
     }
 
-    public LocalDateTime getDateUpdated() {
+    public String getDateUpdated() {
         return dateUpdated;
     }
 
-    public void setDateUpdated(LocalDateTime dateUpdated) {
+    public void setDateUpdated(String dateUpdated) {
         this.dateUpdated = dateUpdated;
     }
 

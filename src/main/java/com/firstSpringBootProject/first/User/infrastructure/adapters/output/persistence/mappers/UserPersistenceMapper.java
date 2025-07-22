@@ -14,7 +14,7 @@ import java.util.List;
 public interface UserPersistenceMapper {
     @Mappings(
             {
-                  /*  @Mapping(source = "id", target = "id"),*/
+                    @Mapping(source = "id", target = "id"),
                     @Mapping(source = "username", target = "username"),
                     @Mapping(source = "lastName", target = "lastName"),
                     @Mapping(source = "email", target = "email"),
@@ -30,7 +30,7 @@ public interface UserPersistenceMapper {
     User toUser(UserEntity userEntity);
     List<User> toUsers(List<UserEntity> userEntities);
 
-//    @InheritInverseConfiguration
+    @InheritInverseConfiguration
     UserEntity toUserEntity(User user);
 
 }

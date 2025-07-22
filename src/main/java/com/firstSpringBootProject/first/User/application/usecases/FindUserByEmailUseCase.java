@@ -1,7 +1,7 @@
 package com.firstSpringBootProject.first.User.application.usecases;
 
-import com.firstSpringBootProject.first.User.domain.exceptions.DomainException;
-import com.firstSpringBootProject.first.User.domain.exceptions.ErrorMessageCode;
+import com.firstSpringBootProject.first.User.domain.exceptions.UserDomainException;
+import com.firstSpringBootProject.first.User.domain.exceptions.ErrorUserMessageCode;
 import com.firstSpringBootProject.first.User.domain.models.User;
 import com.firstSpringBootProject.first.User.domain.ports.in.FindUserByEmailPort;
 import com.firstSpringBootProject.first.User.domain.ports.out.UserRepositoryPort;
@@ -17,13 +17,11 @@ public class FindUserByEmailUseCase implements FindUserByEmailPort {
     @Override
     public User findByEmail(String email) {
 
-        String message =  "User with email " + email + " not found";
-
         return this.userRepositoryPort.findByEmail(email)
-                .orElseThrow(()-> new DomainException(
-                        ErrorMessageCode.USER_NOT_FOUND.getStatus(),
-                        ErrorMessageCode.USER_NOT_FOUND.getType(),
-                        message,
+                .orElseThrow(()-> new UserDomainException(
+                        ErrorUserMessageCode.USER_NOT_FOUND_EMAIL.getStatus(),
+                        ErrorUserMessageCode.USER_NOT_FOUND_EMAIL.getType(),
+                        String.format(ErrorUserMessageCode.USER_NOT_FOUND_EMAIL.getMessage(), email),
                         null
                         )
                 );

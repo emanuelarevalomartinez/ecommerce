@@ -1,7 +1,7 @@
 package com.firstSpringBootProject.first.User.application.usecases;
 
-import com.firstSpringBootProject.first.User.domain.exceptions.DomainException;
-import com.firstSpringBootProject.first.User.domain.exceptions.ErrorMessageCode;
+import com.firstSpringBootProject.first.User.domain.exceptions.UserDomainException;
+import com.firstSpringBootProject.first.User.domain.exceptions.ErrorUserMessageCode;
 import com.firstSpringBootProject.first.User.domain.ports.in.DeleteUserPort;
 import com.firstSpringBootProject.first.User.domain.ports.out.UserRepositoryPort;
 
@@ -19,12 +19,11 @@ public class DeleteUserUseCase  implements DeleteUserPort {
 
         boolean deleted = userRepositoryPort.deleteById(id);
         if (!deleted) {
-            String message =  "User with id " + id + " not found to delete";
 
-            throw new DomainException(
-                    ErrorMessageCode.USER_NOT_FOUND.getStatus(),
-                    ErrorMessageCode.USER_NOT_FOUND.getType(),
-                    message,
+            throw new UserDomainException(
+                    ErrorUserMessageCode.USER_NOT_FOUND_ID.getStatus(),
+                    ErrorUserMessageCode.USER_NOT_FOUND_ID.getType(),
+                    String.format(ErrorUserMessageCode.USER_NOT_FOUND_ID.getMessage(), id),
                     null
             );
         }

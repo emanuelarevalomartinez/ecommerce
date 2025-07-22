@@ -48,6 +48,15 @@ public class UserController {
     @Autowired
     private UserRestMapper userRestMapper;
 
+    // verificar que todos los metodos funcionen bien y sigan el estandar
+    // colocal los mensajes desde el errorUserMessageCode y no colocarlos directos
+    // usar el maper para a partir del nombre, first name y full name crear el fullName y asi darle uso al maper
+    // quitar el campo username y asignarlo de forma interna
+
+    
+    // me quede ceando los casos de uso de categoria utilizanndo los mensajes de excepciones
+
+
     @PostMapping
     public ResponseEntity<ApiResponse<User>> createUser(@Valid @RequestBody CreateUserDto createUserDto) {
 
@@ -56,7 +65,7 @@ public class UserController {
         User savedUser = this.createUserUseCase.save(newUser);
 
         return ResponseHandler.generateResponse(
-                HttpStatus.OK,
+                HttpStatus.CREATED,
                 null,
                 "Successfully created user",
                 savedUser
@@ -115,7 +124,7 @@ public class UserController {
         );
     }
 
-    @PatchMapping("{id}")
+    @PatchMapping("/{id}")
     public ResponseEntity<ApiResponse<User>> updateUser(@PathVariable Long id, @Valid @RequestBody UpdateUserDto updateUserDto){
 
         User updateUser = userRestMapper.updateUserFromDtoToDomainUser(updateUserDto);

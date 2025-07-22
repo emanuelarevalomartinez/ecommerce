@@ -1,12 +1,13 @@
-package com.firstSpringBootProject.first.User.domain.exceptions;
+package com.firstSpringBootProject.first.Category.domain.exceptions;
 
-public class DomainException extends RuntimeException {
+public class CategoryDomainException extends RuntimeException {
+
     private final String message;
     private final String type;
     private final int statusCode;
     private final Object data;
 
-    public DomainException(int statusCode, String type, String message, Object data) {
+    public CategoryDomainException(int statusCode, String type, String message, Object data) {
         this.message = message;
         this.type = type;
         this.statusCode = statusCode;
@@ -30,5 +31,3 @@ public class DomainException extends RuntimeException {
         return data;
     }
 }
-
-

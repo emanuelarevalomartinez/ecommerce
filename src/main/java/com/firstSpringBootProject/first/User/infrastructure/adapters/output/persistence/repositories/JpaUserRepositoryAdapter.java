@@ -1,7 +1,7 @@
 package com.firstSpringBootProject.first.User.infrastructure.adapters.output.persistence.repositories;
 
-import com.firstSpringBootProject.first.User.domain.exceptions.DomainException;
-import com.firstSpringBootProject.first.User.domain.exceptions.ErrorMessageCode;
+import com.firstSpringBootProject.first.User.domain.exceptions.UserDomainException;
+import com.firstSpringBootProject.first.User.domain.exceptions.ErrorUserMessageCode;
 import com.firstSpringBootProject.first.User.domain.models.User;
 import com.firstSpringBootProject.first.User.domain.ports.out.UserRepositoryPort;
 import com.firstSpringBootProject.first.User.infrastructure.adapters.output.persistence.entities.UserEntity;
@@ -26,26 +26,22 @@ public class JpaUserRepositoryAdapter implements UserRepositoryPort {
     public User save(User user) {
         if (this.findByEmail(user.getEmail()).isPresent()) {
 
-            String message = " User with email " + user.getEmail() + " already exist";
-
-            throw new DomainException(
-                    ErrorMessageCode.EMAIL_CONFLICT.getStatus(),
-                    ErrorMessageCode.PERSISTENCE_ERROR.getType(),
-                    message
-                    , null
+            throw new UserDomainException(
+                    ErrorUserMessageCode.EMAIL_CONFLICT.getStatus(),
+                    ErrorUserMessageCode.EMAIL_CONFLICT.getType(),
+                    String.format(ErrorUserMessageCode.EMAIL_CONFLICT.getMessage(), user.getEmail()),
+                    null
             );
 
         }
 
         if (this.findByUsername(user.getUsername()).isPresent()) {
 
-            String message = " User with username " + user.getUsername() + " already exist";
-
-            throw new DomainException(
-                    ErrorMessageCode.USERNAME_CONFLICT.getStatus(),
-                    ErrorMessageCode.USERNAME_CONFLICT.getType(),
-                    message
-                    , null
+            throw new UserDomainException(
+                    ErrorUserMessageCode.USERNAME_CONFLICT.getStatus(),
+                    ErrorUserMessageCode.USERNAME_CONFLICT.getType(),
+                    String.format(ErrorUserMessageCode.USERNAME_CONFLICT.getMessage(), user.getUsername()),
+                    null
             );
         }
 
@@ -80,14 +76,12 @@ public class JpaUserRepositoryAdapter implements UserRepositoryPort {
     @Override
     public User update(Long id, User user) {
 
-        String message = "Updating User with ID " + id + " was not found";
-
         UserEntity existingEntity = userPersistence.findById(id)
 
-                .orElseThrow(() -> new DomainException(
-                                        ErrorMessageCode.USER_NOT_FOUND.getStatus(),
-                                        ErrorMessageCode.USER_NOT_FOUND.getType(),
-                                        message,
+                .orElseThrow(() -> new UserDomainException(
+                                        ErrorUserMessageCode.USER_NOT_FOUND_ID.getStatus(),
+                                        ErrorUserMessageCode.USER_NOT_FOUND_ID.getType(),
+                                        String.format(ErrorUserMessageCode.USER_NOT_FOUND_ID.getMessage(), id),
                                         null
                                 ));
 
@@ -122,15 +116,14 @@ public class JpaUserRepositoryAdapter implements UserRepositoryPort {
 
     @Override
     public boolean deleteById(Long id) {
-     // userPersistence.deleteById(id);
-     // return false;
+
         Optional<User> existingUser = this.findById(id);
 
         if (existingUser.isPresent()) {
-            userPersistence.deleteById(id); // Llama al método void de Spring Data JPA
-            return true; // El usuario existía y se intentó eliminar
+            userPersistence.deleteById(id);
+            return true;
         } else {
-            return false; // El usuario no fue encontrado
+            return false;
         }
     }
 }
