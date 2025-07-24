@@ -24,7 +24,7 @@ public class DeleteCategoryUseCase implements DeleteCategoryPort {
             throw new CategoryDomainException(
                     ErrorCategoryMessageCode.CATEGORY_NOT_FOUND_ID.getStatus(),
                     ErrorCategoryMessageCode.CATEGORY_NOT_FOUND_ID.getType(),
-                    String.format(ErrorCategoryMessageCode.CATEGORY_NOT_FOUND_ID.getMessage(), id),
+                    String.format(ErrorCategoryMessageCode.CATEGORY_NOT_FOUND_ID.getMessage() + id),
                     null
             );
         }

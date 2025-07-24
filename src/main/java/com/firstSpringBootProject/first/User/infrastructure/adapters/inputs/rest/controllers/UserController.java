@@ -21,9 +21,6 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController {
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
-
-
     @Autowired
     private CreateUserUseCase createUserUseCase;
 
@@ -49,12 +46,9 @@ public class UserController {
     private UserRestMapper userRestMapper;
 
     // verificar que todos los metodos funcionen bien y sigan el estandar
-    // colocal los mensajes desde el errorUserMessageCode y no colocarlos directos
     // usar el maper para a partir del nombre, first name y full name crear el fullName y asi darle uso al maper
     // quitar el campo username y asignarlo de forma interna
 
-    
-    // me quede ceando los casos de uso de categoria utilizanndo los mensajes de excepciones
 
 
     @PostMapping
@@ -129,13 +123,13 @@ public class UserController {
 
         User updateUser = userRestMapper.updateUserFromDtoToDomainUser(updateUserDto);
 
-        User newUser = this.updateUserByIdUseCase.update(id, updateUser);
+        User savedUpdateUser = this.updateUserByIdUseCase.update(id, updateUser);
 
         return ResponseHandler.generateResponse(
                 HttpStatus.OK,
                 null,
                 "Successfully update user",
-                newUser
+                savedUpdateUser
         );
 
     }

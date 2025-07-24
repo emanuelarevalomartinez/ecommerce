@@ -18,10 +18,6 @@ public class Category {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }
@@ -32,10 +28,6 @@ public class Category {
 
     public String getDateCreated() {
         return dateCreated;
-    }
-
-    public void setDateCreated(String dateCreated) {
-        this.dateCreated = dateCreated;
     }
 
     public String getDateUpdated() {

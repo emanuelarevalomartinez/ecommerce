@@ -21,7 +21,7 @@ public class FindUserByUsernameUseCase implements FindUserByUsernamePort {
                 .orElseThrow( () -> new UserDomainException(
                         ErrorUserMessageCode.USER_NOT_FOUND_USERNAME.getStatus(),
                         ErrorUserMessageCode.USER_NOT_FOUND_USERNAME.getType(),
-                        String.format(ErrorUserMessageCode.USER_NOT_FOUND_USERNAME.getMessage(), username),
+                        String.format(ErrorUserMessageCode.USER_NOT_FOUND_USERNAME.getMessage() + username),
                         null
                 ));
     }

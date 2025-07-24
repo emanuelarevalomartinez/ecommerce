@@ -27,12 +27,15 @@ public class JpaCategoryRepositoryAdapter implements CategoryRepositoryPort {
     @Override
     public Category save(Category category) {
 
-        if(this.findById(category.getId()).isPresent()){
+        if(this.findByName(category.getName()).isPresent()){
+
+            System.out.println("error del nombre");
+            System.out.println(category.getName());
 
             throw new CategoryDomainException(
-                    ErrorCategoryMessageCode.CATEGORY_CONFLICT.getStatus(),
-                    ErrorCategoryMessageCode.CATEGORY_CONFLICT.getType(),
-                    String.format(ErrorCategoryMessageCode.CATEGORY_CONFLICT.getMessage(), category.getId()),
+                    ErrorCategoryMessageCode.CATEGORY_NAME_CONFLICT.getStatus(),
+                    ErrorCategoryMessageCode.CATEGORY_NAME_CONFLICT.getType(),
+                    String.format(ErrorCategoryMessageCode.CATEGORY_NAME_CONFLICT.getMessage() + category.getName()),
                     null
             );
 
@@ -56,6 +59,13 @@ public class JpaCategoryRepositoryAdapter implements CategoryRepositoryPort {
     }
 
     @Override
+    public Optional<Category> findByName(String name) {
+        return categoryPersistence.findByName(name)
+                .map(categoryMapper::toCategory);
+    }
+
+
+    @Override
     public Category update(Long id, Category category) {
 
         CategoryEntity existingCategoryEntity = categoryPersistence.findById(id)
@@ -63,7 +73,7 @@ public class JpaCategoryRepositoryAdapter implements CategoryRepositoryPort {
                         () -> new CategoryDomainException(
                                 ErrorCategoryMessageCode.CATEGORY_NOT_FOUND_ID.getStatus(),
                                 ErrorCategoryMessageCode.CATEGORY_NOT_FOUND_ID.getType(),
-                                String.format(ErrorCategoryMessageCode.CATEGORY_NOT_FOUND_ID.getMessage(), id),
+                                String.format(ErrorCategoryMessageCode.CATEGORY_NOT_FOUND_ID.getMessage() + id),
                                 null
                         )
                 );

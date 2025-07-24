@@ -21,7 +21,7 @@ public class FindUserByEmailUseCase implements FindUserByEmailPort {
                 .orElseThrow(()-> new UserDomainException(
                         ErrorUserMessageCode.USER_NOT_FOUND_EMAIL.getStatus(),
                         ErrorUserMessageCode.USER_NOT_FOUND_EMAIL.getType(),
-                        String.format(ErrorUserMessageCode.USER_NOT_FOUND_EMAIL.getMessage(), email),
+                        String.format(ErrorUserMessageCode.USER_NOT_FOUND_EMAIL.getMessage() + email),
                         null
                         )
                 );

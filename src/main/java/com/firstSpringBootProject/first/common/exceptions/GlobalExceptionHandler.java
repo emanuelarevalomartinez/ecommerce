@@ -1,10 +1,12 @@
 package com.firstSpringBootProject.first.common.exceptions;
 
 import com.firstSpringBootProject.first.Category.domain.exceptions.CategoryDomainException;
+import com.firstSpringBootProject.first.Product.domain.exceptions.ProductDomainException;
 import com.firstSpringBootProject.first.User.domain.exceptions.UserDomainException;
 import com.firstSpringBootProject.first.shared.ApiResponse.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -43,6 +45,19 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.valueOf(ex.getStatusCode()));
     }
 
+    public ResponseEntity<ApiResponse<Object>> handleProductDomainExceptions(ProductDomainException ex) {
+
+        int statusCode = (ex.getStatusCode() > 0) ? ex.getStatusCode() : HttpStatus.BAD_REQUEST.value();
+
+        ApiResponse<Object> response = new ApiResponse<>(
+                statusCode,
+                ex.getType(),
+                ex.getMessage(),
+                ex.getData()
+        );
+        return new ResponseEntity<>(response, HttpStatus.valueOf(ex.getStatusCode()));
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ApiResponse<Object>> handleValidationErrors(MethodArgumentNotValidException ex) {
         List<Map<String, String>> errors = ex.getBindingResult()
@@ -59,6 +74,17 @@ public class GlobalExceptionHandler {
                 "ValidationError",
                 "Los datos enviados no son válidos",
                 Map.of("errors", errors)
+        );
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<ApiResponse<Object>> handleEmptyOrInvalidDtoBody(HttpMessageNotReadableException ex) {
+        ApiResponse<Object> response = new ApiResponse<>(
+                HttpStatus.BAD_REQUEST.value(),
+                "InvalidRequestBody",
+                "El cuerpo de la solicitud está vacío o mal formado",
+                Map.of("error", ex.getMessage())
         );
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }

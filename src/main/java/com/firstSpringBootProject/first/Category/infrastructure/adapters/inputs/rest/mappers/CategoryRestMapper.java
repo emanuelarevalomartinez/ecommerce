@@ -19,7 +19,7 @@ public interface CategoryRestMapper {
     })
 
 
-    Category createCategoryFromDtoToDomainUser(CreateCategoryDto createCategoryDto);
+    Category createCategoryFromDtoToDomainCategory(CreateCategoryDto createCategoryDto);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     Category updateCategoryFromDtoToDomainCategory(UpdateCategoryDto updateCategoryDto);

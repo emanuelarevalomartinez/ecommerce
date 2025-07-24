@@ -2,7 +2,7 @@ package com.firstSpringBootProject.first.Category.domain.exceptions;
 
 
 public enum ErrorCategoryMessageCode {
-    CATEGORY_CONFLICT( 409, "CategoryConflict", "El nombre de la categoria ya está en uso: "),
+    CATEGORY_NAME_CONFLICT( 409, "CategoryConflict", "El nombre de la categoria ya está en uso: "),
     CATEGORY_NOT_FOUND_ID( 404, "CategoryNotFound", "Categoria con id no encontrado: "),
     CATEGORY_PERSISTENCE_ERROR(400, "CategoryPersistenceError", "Error de integridad de datos");
 

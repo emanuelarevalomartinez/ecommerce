@@ -21,7 +21,7 @@ public class FindUserByIdUseCase implements FindUserByIdPort {
                 .orElseThrow(()-> new UserDomainException(
                         ErrorUserMessageCode.USER_NOT_FOUND_ID.getStatus(),
                         ErrorUserMessageCode.USER_NOT_FOUND_ID.getType(),
-                        String.format(ErrorUserMessageCode.USER_NOT_FOUND_ID.getMessage(), id),
+                        String.format(ErrorUserMessageCode.USER_NOT_FOUND_ID.getMessage() + id),
                         null
                 ));
     }

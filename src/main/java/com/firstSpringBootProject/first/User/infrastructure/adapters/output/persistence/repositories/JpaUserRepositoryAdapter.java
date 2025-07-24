@@ -29,7 +29,7 @@ public class JpaUserRepositoryAdapter implements UserRepositoryPort {
             throw new UserDomainException(
                     ErrorUserMessageCode.EMAIL_CONFLICT.getStatus(),
                     ErrorUserMessageCode.EMAIL_CONFLICT.getType(),
-                    String.format(ErrorUserMessageCode.EMAIL_CONFLICT.getMessage(), user.getEmail()),
+                    String.format(ErrorUserMessageCode.EMAIL_CONFLICT.getMessage() + user.getEmail()),
                     null
             );
 
@@ -40,7 +40,7 @@ public class JpaUserRepositoryAdapter implements UserRepositoryPort {
             throw new UserDomainException(
                     ErrorUserMessageCode.USERNAME_CONFLICT.getStatus(),
                     ErrorUserMessageCode.USERNAME_CONFLICT.getType(),
-                    String.format(ErrorUserMessageCode.USERNAME_CONFLICT.getMessage(), user.getUsername()),
+                    String.format(ErrorUserMessageCode.USERNAME_CONFLICT.getMessage() + user.getUsername()),
                     null
             );
         }
@@ -81,7 +81,7 @@ public class JpaUserRepositoryAdapter implements UserRepositoryPort {
                 .orElseThrow(() -> new UserDomainException(
                                         ErrorUserMessageCode.USER_NOT_FOUND_ID.getStatus(),
                                         ErrorUserMessageCode.USER_NOT_FOUND_ID.getType(),
-                                        String.format(ErrorUserMessageCode.USER_NOT_FOUND_ID.getMessage(), id),
+                                        String.format(ErrorUserMessageCode.USER_NOT_FOUND_ID.getMessage() + id),
                                         null
                                 ));
 
