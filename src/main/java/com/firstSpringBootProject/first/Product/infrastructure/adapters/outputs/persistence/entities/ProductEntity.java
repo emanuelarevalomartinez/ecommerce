@@ -1,9 +1,12 @@
 package com.firstSpringBootProject.first.Product.infrastructure.adapters.outputs.persistence.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.firstSpringBootProject.first.Category.infrastructure.adapters.output.persistence.entities.CategoryEntity;
 import com.firstSpringBootProject.first.User.infrastructure.adapters.output.persistence.entities.UserEntity;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.DecimalMax;
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -35,9 +38,10 @@ public class ProductEntity {
     @Size(min = 4, max = 500)
     private String urlImage;
 
-    @Column(nullable = true, length = 100)
-    @Size(min = 1, max = 100)
-    private String price;
+    @Column(nullable = true)
+    @DecimalMin(value = "1.0")
+    @DecimalMax(value = "100.0")
+    private Float price;
 
     @Column(nullable = false, updatable = false)
     @CreationTimestamp
@@ -46,7 +50,9 @@ public class ProductEntity {
     @UpdateTimestamp
     private LocalDateTime dateUpdated;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    @JsonBackReference
     private UserEntity user;
 
     @ManyToOne
@@ -92,11 +98,11 @@ public class ProductEntity {
         this.urlImage = urlImage;
     }
 
-    public String getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 

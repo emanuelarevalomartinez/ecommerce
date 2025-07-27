@@ -45,9 +45,8 @@ public class UserController {
     @Autowired
     private UserRestMapper userRestMapper;
 
-    // verificar que todos los metodos funcionen bien y sigan el estandar
-    // usar el maper para a partir del nombre, first name y full name crear el fullName y asi darle uso al maper
-    // quitar el campo username y asignarlo de forma interna
+
+
 
 
 

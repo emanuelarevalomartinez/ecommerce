@@ -7,13 +7,16 @@ public class Product {
     private String code;
     private String description;
     private String urlImage;
-    private float price;
+    private Float price;
     private String dateCreated;
     private String dateUpdated;
     private Long userId;
     private Long categoryId;
 
-    public Product(Long id, String name, String code, String description, String urlImage, float price, String dateCreated, String dateUpdated, Long userId, Long categoryId) {
+    public Product() {
+    }
+
+    public Product(Long id, String name, String code, String description, String urlImage, Float price, String dateCreated, String dateUpdated, Long userId, Long categoryId) {
         this.id = id;
         this.name = name;
         this.code = code;
@@ -26,8 +29,22 @@ public class Product {
         this.categoryId = categoryId;
     }
 
+    public Product(String name, String code, String description, String urlImage, Float price, Long userId, Long categoryId) {
+        this.name = name;
+        this.code = code;
+        this.description = description;
+        this.urlImage = urlImage;
+        this.price = price;
+        this.userId = userId;
+        this.categoryId = categoryId;
+    }
+
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -62,16 +79,20 @@ public class Product {
         this.urlImage = urlImage;
     }
 
-    public float getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 
     public String getDateCreated() {
         return dateCreated;
+    }
+
+    public void setDateCreated(String dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
     public String getDateUpdated() {

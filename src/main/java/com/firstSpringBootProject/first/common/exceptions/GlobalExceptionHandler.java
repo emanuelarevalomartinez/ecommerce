@@ -45,6 +45,7 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.valueOf(ex.getStatusCode()));
     }
 
+    @ExceptionHandler(ProductDomainException.class)
     public ResponseEntity<ApiResponse<Object>> handleProductDomainExceptions(ProductDomainException ex) {
 
         int statusCode = (ex.getStatusCode() > 0) ? ex.getStatusCode() : HttpStatus.BAD_REQUEST.value();

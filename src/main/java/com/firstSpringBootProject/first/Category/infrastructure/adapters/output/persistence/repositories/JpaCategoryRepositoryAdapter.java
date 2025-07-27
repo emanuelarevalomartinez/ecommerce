@@ -8,9 +8,11 @@ import com.firstSpringBootProject.first.Category.infrastructure.adapters.output.
 import com.firstSpringBootProject.first.Category.infrastructure.adapters.output.persistence.mappers.CategoryPersistenceMapper;
 import com.firstSpringBootProject.first.User.domain.exceptions.ErrorUserMessageCode;
 import com.firstSpringBootProject.first.User.domain.exceptions.UserDomainException;
+import com.firstSpringBootProject.first.User.infrastructure.adapters.output.persistence.entities.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,9 +30,6 @@ public class JpaCategoryRepositoryAdapter implements CategoryRepositoryPort {
     public Category save(Category category) {
 
         if(this.findByName(category.getName()).isPresent()){
-
-            System.out.println("error del nombre");
-            System.out.println(category.getName());
 
             throw new CategoryDomainException(
                     ErrorCategoryMessageCode.CATEGORY_NAME_CONFLICT.getStatus(),
@@ -58,6 +57,16 @@ public class JpaCategoryRepositoryAdapter implements CategoryRepositoryPort {
                 .map(categoryMapper::toCategory);
     }
 
+    public CategoryEntity findEntityById(Long id) {
+        return categoryPersistence.findById(id)
+                .orElseThrow( () -> new UserDomainException(
+                        ErrorCategoryMessageCode.CATEGORY_NOT_FOUND_ID.getStatus(),
+                        ErrorCategoryMessageCode.CATEGORY_NOT_FOUND_ID.getType(),
+                        String.format(ErrorCategoryMessageCode.CATEGORY_NOT_FOUND_ID.getMessage() + id),
+                        null
+                ) );
+    }
+
     @Override
     public Optional<Category> findByName(String name) {
         return categoryPersistence.findByName(name)
@@ -83,10 +92,10 @@ public class JpaCategoryRepositoryAdapter implements CategoryRepositoryPort {
             existingCategoryEntity.setName(category.getName());
         }
 
-        // TODO tengo que ver como hacer que el tipo de retorno no de error a la hora de convertir los datos
-//        if(category.getDateUpdated() != null){
-//            existingCategoryEntity.setDateUpdated(category.getDateUpdated());
-//        }
+        if (category.getDateUpdated() != null) {
+            LocalDateTime updatedDate = LocalDateTime.parse(category.getDateUpdated());
+            existingCategoryEntity.setDateUpdated(updatedDate);
+        }
 
         CategoryEntity updateCategoryEntity = categoryPersistence.save(existingCategoryEntity);
         return categoryMapper.toCategory(updateCategoryEntity);

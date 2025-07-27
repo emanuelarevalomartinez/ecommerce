@@ -1,9 +1,11 @@
 package com.firstSpringBootProject.first.User.domain.models;
 
 
+import com.firstSpringBootProject.first.Product.domain.models.Product;
 import com.firstSpringBootProject.first.User.domain.enums.UserType;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class User {
 
@@ -18,8 +20,24 @@ public class User {
     private UserType userType;
     private String dateCreated;
     private String dateUpdated;
+    private List<Product> products;
 
-    public User(Long id,String username, String firstName, String lastName, String email, String address, String cellphone, String password, UserType userType, String dateCreated, String dateUpdated) {
+//    public User(Long id,String username, String firstName, String lastName, String email, String address, String cellphone, String password, UserType userType, String dateCreated, String dateUpdated) {
+//        this.id = id;
+//        this.username = username;
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.email = email;
+//        this.address = address;
+//        this.cellphone = cellphone;
+//        this.password = password;
+//        this.userType = userType;
+//        this.dateCreated = dateCreated;
+//        this.dateUpdated = dateUpdated;
+//    }
+
+
+    public User(Long id, String username, String firstName, String lastName, String email, String address, String cellphone, String password, UserType userType, String dateCreated, String dateUpdated, List<Product> products) {
         this.id = id;
         this.username = username;
         this.firstName = firstName;
@@ -31,14 +49,11 @@ public class User {
         this.userType = userType;
         this.dateCreated = dateCreated;
         this.dateUpdated = dateUpdated;
+        this.products = products;
     }
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getUsername() {
@@ -115,6 +130,14 @@ public class User {
 
     public void setDateUpdated(String dateUpdated) {
         this.dateUpdated = dateUpdated;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 
     @Override

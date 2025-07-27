@@ -3,12 +3,10 @@ package com.firstSpringBootProject.first.User.infrastructure.adapters.output.per
 
 import com.firstSpringBootProject.first.User.domain.models.User;
 import com.firstSpringBootProject.first.User.infrastructure.adapters.output.persistence.entities.UserEntity;
-import org.mapstruct.InheritInverseConfiguration;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
+import org.mapstruct.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring")
 public interface UserPersistenceMapper {
@@ -23,14 +21,18 @@ public interface UserPersistenceMapper {
                     @Mapping(source = "password", target = "password"),
                     @Mapping(source = "userType", target = "userType"),
                     @Mapping(source = "dateCreated", target = "dateCreated"),
-                    @Mapping(source = "dateUpdated", target = "dateUpdated")
+                    @Mapping(source = "dateUpdated", target = "dateUpdated"),
+                    @Mapping(source = "products", target = "products")
             }
     )
 
     User toUser(UserEntity userEntity);
+
+
     List<User> toUsers(List<UserEntity> userEntities);
 
     @InheritInverseConfiguration
+    @Mapping(target = "products", ignore = true)
     UserEntity toUserEntity(User user);
 
 }

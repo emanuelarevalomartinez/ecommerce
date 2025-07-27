@@ -8,11 +8,13 @@ import com.firstSpringBootProject.first.User.infrastructure.adapters.output.pers
 import com.firstSpringBootProject.first.User.infrastructure.adapters.output.persistence.mappers.UserPersistenceMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 @Repository
+@Transactional
 public class JpaUserRepositoryAdapter implements UserRepositoryPort {
 
     @Autowired
@@ -51,6 +53,7 @@ public class JpaUserRepositoryAdapter implements UserRepositoryPort {
 
 
     @Override
+    @Transactional
     public List<User> findAll() {
         return userMapper.toUsers(userPersistence.findAll());
     }
@@ -59,6 +62,16 @@ public class JpaUserRepositoryAdapter implements UserRepositoryPort {
     public Optional<User> findById(Long id) {
         return userPersistence.findById(id)
                 .map(userMapper::toUser);
+    }
+
+    public UserEntity findEntityById(Long id) {
+        return userPersistence.findById(id)
+                .orElseThrow( () -> new UserDomainException(
+                ErrorUserMessageCode.USER_NOT_FOUND_ID.getStatus(),
+                ErrorUserMessageCode.USER_NOT_FOUND_ID.getType(),
+                String.format(ErrorUserMessageCode.USER_NOT_FOUND_ID.getMessage() + id),
+                null
+        ) );
     }
 
     @Override

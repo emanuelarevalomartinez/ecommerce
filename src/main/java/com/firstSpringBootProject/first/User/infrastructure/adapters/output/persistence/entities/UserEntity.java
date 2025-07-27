@@ -1,6 +1,8 @@
 package com.firstSpringBootProject.first.User.infrastructure.adapters.output.persistence.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.firstSpringBootProject.first.Product.infrastructure.adapters.outputs.persistence.entities.ProductEntity;
 import com.firstSpringBootProject.first.User.domain.enums.UserType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -9,6 +11,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "users", indexes = {
@@ -62,15 +66,15 @@ public class UserEntity {
     @UpdateTimestamp
     private LocalDateTime dateUpdated;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<ProductEntity> products = new ArrayList<>();
+
     public UserEntity() {
     }
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getUsername() {
@@ -151,6 +155,15 @@ public class UserEntity {
 
     public void setDateUpdated(LocalDateTime dateUpdated) {
         this.dateUpdated = dateUpdated;
+    }
+
+
+    public List<ProductEntity> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<ProductEntity> products) {
+        this.products = products;
     }
 
     @Override
