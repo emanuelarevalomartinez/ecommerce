@@ -55,7 +55,7 @@ public class JpaUserRepositoryAdapter implements UserRepositoryPort {
     @Override
     @Transactional
     public List<User> findAll() {
-        return userMapper.toUsers(userPersistence.findAll());
+        return userMapper.toUsers(userPersistence.findAllWithProducts());
     }
 
     @Override

@@ -50,9 +50,7 @@ public class ProductEntity {
     @UpdateTimestamp
     private LocalDateTime dateUpdated;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    @JsonBackReference
+    @ManyToOne
     private UserEntity user;
 
     @ManyToOne

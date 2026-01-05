@@ -13,10 +13,10 @@ public interface JpaUserRepository extends JpaRepository<UserEntity, Long> {
     Optional<UserEntity> findByEmail(String email);
     Optional<UserEntity> findByUsername(String username);
 
-    @EntityGraph(attributePaths = {"products"})
-    @Override
-    List<UserEntity> findAll();
+//    @EntityGraph(attributePaths = {"products"})
+//    @Override
+//    List<UserEntity> findAll();
 
-//    @Query("SELECT DISTINCT u FROM UserEntity u LEFT JOIN FETCH u.products")
-//    List<UserEntity> findAllWithProducts();
+    @Query("SELECT DISTINCT u FROM UserEntity u LEFT JOIN FETCH u.products")
+    List<UserEntity> findAllWithProducts();
 }

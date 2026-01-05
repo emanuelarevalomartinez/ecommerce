@@ -67,7 +67,6 @@ public class UserEntity {
     private LocalDateTime dateUpdated;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
     private List<ProductEntity> products = new ArrayList<>();
 
     public UserEntity() {

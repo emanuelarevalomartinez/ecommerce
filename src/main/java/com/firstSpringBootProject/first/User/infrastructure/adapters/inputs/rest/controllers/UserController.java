@@ -46,7 +46,10 @@ public class UserController {
     private UserRestMapper userRestMapper;
 
 
-
+// usar el maper para a partir del nombre, first name y full name crear el fullName y asi darle uso al maper
+    // quitar el campo username y asignarlo de forma interna
+    // hy que controlar el metodo de crear usuario o actualizarlo para que reciba los productos asociados
+    // hay que corregir y verificar que se pueda introducir la fecha de actualizacion de todo
 
 
 
