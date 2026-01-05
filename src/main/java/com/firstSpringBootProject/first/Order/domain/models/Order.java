@@ -18,13 +18,6 @@ public class Order {
     public Order() {
         orderProducts = new ArrayList<>();
     }
-
-//    public BigDecimal getTotalOrderPrice(){
-//        return this.orderProducts.stream().map( orderProduct -> {
-//
-//            return  orderProduct.getTotalItems();
-//        } ).reduce(BigDecimal.ZERO,BigDecimal::add);
-//    }
     
 public BigDecimal getTotalOrderPrice() {
     BigDecimal total = BigDecimal.ZERO;
