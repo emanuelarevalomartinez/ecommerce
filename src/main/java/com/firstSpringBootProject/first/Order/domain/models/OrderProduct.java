@@ -9,6 +9,9 @@ public class OrderProduct {
     private BigDecimal price;
     private Long productId;
 
+    public OrderProduct() {
+    }
+
     public OrderProduct(Long id, BigDecimal quantity, BigDecimal price, Long productId) {
         this.id = id;
         this.quantity = quantity;

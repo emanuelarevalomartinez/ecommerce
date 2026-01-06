@@ -1,12 +1,11 @@
 package com.firstSpringBootProject.first.Order.infrastructure.adapters.outputs.persistence.entities;
 
+import com.firstSpringBootProject.first.Order.domain.enums.OrderState;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.DecimalMax;
-import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.Size;
-import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "orders")
@@ -16,28 +15,64 @@ public class OrderEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false, length = 100)
-    @Size(min = 4, max = 100)
-    private String name;
-
-    @Column(nullable = false, length = 100)
-    @Size(min = 4, max = 100)
-    private String code;
-
-    @Column(nullable = true, length = 500)
-    @Size(min = 4, max = 500)
-    private String description;
-
-    @Column(nullable = true, length = 500)
-    @Size(min = 4, max = 500)
-    private String urlImage;
-
-    @Column(nullable = true)
-    @DecimalMin(value = "1.0")
-    @DecimalMax(value = "100.0")
-    private Float price;
-
-    @Column(nullable = false, updatable = false)
-    @CreationTimestamp
+    @Column(nullable = false)
     private LocalDateTime dateCreated;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 20)
+    private OrderState orderState;
+
+    @Column(nullable = false)
+    private Long userId;
+
+    @OneToMany(
+            mappedBy = "order",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.LAZY
+    )
+    private List<OrderProductEntity> orderProducts = new ArrayList<>();
+
+    public OrderEntity() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public LocalDateTime getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(LocalDateTime dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
+    public OrderState getOrderState() {
+        return orderState;
+    }
+
+    public void setOrderState(OrderState orderState) {
+        this.orderState = orderState;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public List<OrderProductEntity> getOrderProducts() {
+        return orderProducts;
+    }
+
+    public void setOrderProducts(List<OrderProductEntity> orderProducts) {
+        this.orderProducts = orderProducts;
+    }
 }

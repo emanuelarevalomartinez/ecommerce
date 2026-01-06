@@ -1,28 +1,31 @@
-package com.firstSpringBootProject.first.Order.application.usecases;
+package com.firstSpringBootProject.first.Order.infrastructure.adapters.outputs.persistence.repositories;
 
 import com.firstSpringBootProject.first.Order.domain.models.Order;
 import com.firstSpringBootProject.first.Order.domain.models.OrderProduct;
-import com.firstSpringBootProject.first.Order.domain.ports.in.CreateOrderPort;
 import com.firstSpringBootProject.first.Order.domain.ports.out.OrderRepositoryPort;
 import com.firstSpringBootProject.first.Order.infrastructure.adapters.outputs.persistence.entities.OrderEntity;
-import com.firstSpringBootProject.first.Order.infrastructure.adapters.outputs.persistence.entities.OrderProductEntity;
+import com.firstSpringBootProject.first.Order.infrastructure.adapters.outputs.persistence.mappers.OrderPersistenceMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-public class CreateOrderUseCase implements CreateOrderPort {
 
-    private final OrderRepositoryPort orderRepositoryPort;
+@Repository
+public class JpaOrderRepositoryAdapter implements OrderRepositoryPort {
 
-    public CreateOrderUseCase(OrderRepositoryPort orderRepositoryPort) {
-        this.orderRepositoryPort = orderRepositoryPort;
-    }
+    @Autowired
+    private JpaOrderRepository orderPersistence;
+
+    @Autowired
+    private OrderPersistenceMapper orderMapper;
 
     @Override
     public Order save(Order order) {
-
 
         OrderProduct product1 = new OrderProduct(
                 BigDecimal.valueOf(2),   // quantity
@@ -51,6 +54,14 @@ public class CreateOrderUseCase implements CreateOrderPort {
 
         return o;
 
-       // return this.orderRepositoryPort.save(order);
+      //  OrderEntity entity = orderPersistence.save(orderMapper.toOrderEntity(order));
+
+       //  return orderMapper.toOrder(entity);
+    }
+
+
+    @Override
+    public Optional<Order> findById(Long id) {
+        return Optional.empty();
     }
 }
