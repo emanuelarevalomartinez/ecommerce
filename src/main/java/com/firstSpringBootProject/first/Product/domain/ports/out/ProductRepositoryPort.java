@@ -18,6 +18,4 @@ public interface ProductRepositoryPort {
     Product update(Long id,Product product);
 
     boolean deleteById(Long id);
-
-
 }

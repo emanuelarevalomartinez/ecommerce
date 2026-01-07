@@ -29,4 +29,11 @@ public interface OrderPersistenceMapper {
    /* @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     User updateOrderFromDtoToDomainOrder(UpdateUserDto updateUserDto);*/
 
+    @AfterMapping
+    default void linkOrderProducts(@MappingTarget OrderEntity orderEntity) {
+        if (orderEntity.getOrderProducts() != null) {
+            orderEntity.getOrderProducts()
+                    .forEach(p -> p.setOrder(orderEntity));
+        }
+    }
 }

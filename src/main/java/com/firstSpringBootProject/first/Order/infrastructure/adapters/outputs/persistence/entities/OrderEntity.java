@@ -2,6 +2,7 @@ package com.firstSpringBootProject.first.Order.infrastructure.adapters.outputs.p
 
 import com.firstSpringBootProject.first.Order.domain.enums.OrderState;
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -15,7 +16,8 @@ public class OrderEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, updatable = false)
+    @CreationTimestamp
     private LocalDateTime dateCreated;
 
     @Enumerated(EnumType.STRING)
@@ -74,5 +76,16 @@ public class OrderEntity {
 
     public void setOrderProducts(List<OrderProductEntity> orderProducts) {
         this.orderProducts = orderProducts;
+    }
+
+    @Override
+    public String toString() {
+        return "OrderEntity{" +
+                "id=" + id +
+                ", dateCreated=" + dateCreated +
+                ", orderState=" + orderState +
+                ", userId=" + userId +
+                ", orderProducts=" + orderProducts +
+                '}';
     }
 }

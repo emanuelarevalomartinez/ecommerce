@@ -75,4 +75,15 @@ public BigDecimal getTotalOrderPrice() {
     public void setUserId(Long userId) {
         this.userId = userId;
     }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", dateCreated=" + dateCreated +
+                ", orderProducts=" + orderProducts +
+                ", orderState=" + orderState +
+                ", userId=" + userId +
+                '}';
+    }
 }

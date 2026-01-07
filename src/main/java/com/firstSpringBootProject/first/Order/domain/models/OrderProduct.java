@@ -60,4 +60,14 @@ public class OrderProduct {
     public BigDecimal getTotalItems(){
         return this.price.multiply(quantity);
     }
+
+    @Override
+    public String toString() {
+        return "OrderProduct{" +
+                "id=" + id +
+                ", quantity=" + quantity +
+                ", price=" + price +
+                ", productId=" + productId +
+                '}';
+    }
 }
